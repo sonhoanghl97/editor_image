@@ -6,7 +6,7 @@ const PATH_DIST = join(__dirname, "../../dist");
 const PATH_PUBLIC = join(__dirname, "../../public");
 const PATH_SRC_INDEX = join(PATH_SRC, "./react/index.jsx");
 const PATH_NODE_MODULES = join(__dirname, "../../node_modules");
-const HOST = 'localhost';
+const HOST = "localhost";
 const PORT = 2000;
 
 exports.PATH_SRC = PATH_SRC;
@@ -19,13 +19,13 @@ exports.HOST = HOST;
 exports.PORT = PORT;
 
 exports.COMMON_CONFIG = {
-	entry: {
-		loader: ["@babel/polyfill", PATH_SRC_INDEX],
-	},
+  entry: {
+    loader: ["@babel/polyfill", PATH_SRC_INDEX],
+  },
   resolve: {
     extensions: [".js", ".jsx", ".css"],
   },
-	output: {
+  output: {
     publicPath: "/",
   },
   module: {
@@ -38,14 +38,6 @@ exports.COMMON_CONFIG = {
         options: {
           cacheDirectory: true,
         },
-      },
-			{
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
-        include: [PATH_NODE_MODULES, PATH_SRC],
       },
       {
         test: /\.(woff|woff2|otf|ttf|eot)$/,

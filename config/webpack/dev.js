@@ -10,7 +10,9 @@ const {
   COMMON_CONFIG,
   PATH_BUILD,
 	HOST,
-	PORT
+	PORT,
+	PATH_NODE_MODULES,
+	PATH_SRC
 } = require("./common.js");
 
 module.exports = merge(COMMON_CONFIG, {
@@ -21,6 +23,25 @@ module.exports = merge(COMMON_CONFIG, {
     chunkFilename: "js/[name].bundle.js",
     path: PATH_BUILD,
   },
+	module: {
+		rules: [
+			{
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+            },
+          },
+					"postcss-loader"
+        ],
+        exclude: [PATH_NODE_MODULES],
+        include: [PATH_SRC],
+      },
+		]
+	},
   plugins: [
 		new CopyWebpackPlugin([{ from: PATH_PUBLIC, to: PATH_BUILD }], {
       ignore: 'index.html',
