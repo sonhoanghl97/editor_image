@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_OPTIONS=--max-old-space-size=10000 NODE_ENV=development webpack-dev-server --progress --config ./config/webpack/dev.js",
-    "build": "cross-env NODE_ENV=production webpack --progress --colors --config ./scripts/webpack/prod.js"
+    "build": "cross-env NODE_ENV=production webpack --progress --colors --config ./config/webpack/prod.js"
   },
   "repository": {
     "type": "git",
@@ -40,15 +40,21 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@tailwindcss/jit": "^0.1.18",
+    "preload-webpack-plugin": "^3.0.0-beta.3",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.0.6",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^5.0.2",
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^5.2.0",
     "css-loader": "^3.1.0",
     "dotenv": "^8.2.0",
     "file-loader": "^4.1.0",
+    "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^1.4.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss": "^8.2.9",
     "postcss-import": "^14.0.0",
     "postcss-loader": "^4.2.0",
