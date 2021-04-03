@@ -13,7 +13,7 @@ const InlineSourcePlugin = require("html-webpack-inline-source-plugin");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const PurgecssPlugin = require('purgecss-webpack-plugin')
+const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const env = dotenv.config({ path: join(__dirname, "../../env/prod.env") })
   .parsed;
@@ -45,6 +45,20 @@ module.exports = merge(COMMON_CONFIG, {
     concatenateModules: true,
     splitChunks: {
       chunks: "all",
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            )[1];
+            return `npm.${packageName.replace("@", "")}`;
+          },
+          chunks: "all",
+        },
+      },
     },
     minimizer: [
       new TerserPlugin({
@@ -145,7 +159,7 @@ module.exports = merge(COMMON_CONFIG, {
       chunkFilename: "static/css/[name].[contenthash].chunk.css",
     }),
     new PurgecssPlugin({
-      paths: glob.sync(`${PATH_SRC}/**/*`,  { nodir: true }),
+      paths: glob.sync(`${PATH_SRC}/**/*`, { nodir: true }),
     }),
     new webpack.HashedModuleIdsPlugin(),
     new CompressionPlugin({
