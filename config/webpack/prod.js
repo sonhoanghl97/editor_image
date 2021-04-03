@@ -1,6 +1,7 @@
 const merge = require("webpack-merge");
 const webpack = require("webpack");
 const dotenv = require("dotenv");
+const glob = require("glob");
 const { join } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -12,6 +13,7 @@ const InlineSourcePlugin = require("html-webpack-inline-source-plugin");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const PurgecssPlugin = require('purgecss-webpack-plugin')
 
 const env = dotenv.config({ path: join(__dirname, "../../env/prod.env") })
   .parsed;
@@ -141,6 +143,9 @@ module.exports = merge(COMMON_CONFIG, {
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash].css",
       chunkFilename: "static/css/[name].[contenthash].chunk.css",
+    }),
+    new PurgecssPlugin({
+      paths: glob.sync(`${PATH_SRC}/**/*`,  { nodir: true }),
     }),
     new webpack.HashedModuleIdsPlugin(),
     new CompressionPlugin({

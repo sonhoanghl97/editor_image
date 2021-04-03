@@ -6,7 +6,7 @@ import "./style/utilities.css"
 import "./style/index.css"
 
 const CC = () => {
-    return <>dsa<img src="/dasdas.png"/></>
+    return <>dsadsadasdsadS</>
 }
 
 ReactDOM.render(<CC/>, document.getElementById("app"));
