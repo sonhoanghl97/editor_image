@@ -6,7 +6,6 @@ module.exports = {
       plugins: [],
       path: ["./node_modules"],
     }),
-    require("@tailwindcss/jit")(join(__dirname, "./tailwind.config.js")),
     require("postcss-utilities")(),
     require("precss")(),
   ],
